@@ -1,0 +1,53 @@
+<nav>
+    <div class="nav-wrapper teal darken-1">
+      <a class="brand-logo" routerLink="/home">
+        <i  class="large material-icons">event_note</i>Task Manager</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">     
+        <li *ngIf="userService.roleMatch(['Administrator'])">
+            <a routerLink="/admin">Administration</a>
+          </li>
+        <li>
+          <a (click)="Logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+<body>
+    <div class="fixed-action-btn">
+    <a class="btn-floating btn-large teal darken-1">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li>
+        <a class="btn-floating yellow" routerLink="/add">
+          <i class="material-icons">add_circle_outline</i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="task-table">
+      <div class="card center">
+          <table class="striped highlight">
+        <thead>
+          <tr >
+              <th>#</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>-</th>
+              <th>-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks; let i=index">            
+            <td>{{i+1}}</td>
+            <td>{{task.name}}</td>
+            <td>{{task.description}}</td>
+            <td><a (click)="onUpdate(task)"><i class="material-icons">create</i></a></td>            
+            <td><a (click)="onDelete(task.id)"><i class="material-icons">cancel</i></a></td>
+        </tr>                     
+        </tbody>
+      </table>
+    </div>    
+  </div>
+</body>
+
