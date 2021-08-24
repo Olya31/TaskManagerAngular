@@ -42,8 +42,7 @@ export class HomeComponent implements OnInit {
         localStorage.removeItem('userToken');
         this.router.navigate(['/login']);        
       }
-       });
-    
+    });    
   }
 
   onUpdate(task: TaskModelDto) {
@@ -51,12 +50,11 @@ export class HomeComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    console.log(id);
       this.taskService.deleteTask(id).subscribe(res => {
         if(res == true)
         {
-          this.taskService.refreshList();
           this.toastr.success('Deleted successfully');
+          this.taskService.refreshList();        
         }
         else{
           this.toastr.error('Deleted unsuccessful');

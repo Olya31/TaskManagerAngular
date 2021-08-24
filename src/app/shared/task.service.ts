@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { TaskModelDto } from './task.model';
 import { CronModelDto } from './cron.model';
@@ -22,6 +22,11 @@ export class TaskService {
 
   postTask(formData : TaskModelDto){
     this.convertStringToCronString(formData.cronFormat);
+    var reqHeader = new HttpHeaders({ 
+      'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+    });
+
+    console.log(reqHeader)
     const body: TaskModelDto = {
       id: formData.id,
       name: formData.name,
@@ -29,9 +34,10 @@ export class TaskService {
       url: this.urlApi,
       cronFormat: this.cronString,  
       header: this.header
+      
     }
     console.log(body)
-    return this.http.post(this.rootUrl+'/add',body);     
+    return this.http.post(this.rootUrl+'/add',body, { headers: reqHeader });     
    }
    
   refreshList(){

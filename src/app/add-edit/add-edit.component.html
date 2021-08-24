@@ -37,8 +37,11 @@
         <div class="form-group">
           <div class="form-row">
             <div *ngIf="!isAddMode" class="input col s12">
-              <label>Weather</label>
-              <input type="text" formControlName="url">              
+              <label >Weather</label> 
+              <div class="custom-control custom-radio custom-control-inline"  *ngFor="let data of Data; let i = index;">                         
+                <input type="radio" class="custom-control-input" name="non" id={{data.id}} [value]="data.value" (click)="onCheckboxChange($event)" mdbInput/>
+                <label class="custom-control-label" for={{data.id}}>{{data.name}}</label>                     
+              </div>                 
             </div>           
             <div *ngIf="isAddMode" >  
               <label >Weather</label> 
@@ -49,7 +52,6 @@
             </div>
           </div>   
         </div>
-
         <div class="form-group">
           <div class="form-row">
             <div *ngIf="isForecastof24h"  class="input col s12">
@@ -66,8 +68,7 @@
               <input type="text" formControlName="city3d">              
             </div>   
           </div>
-        </div>   
-
+        </div> 
         <div class="form-group">
           <div class="form-row">
             <div *ngIf="isForecastof48h" class="input col s12">
@@ -77,8 +78,7 @@
               <input type="text" formControlName="longitude">              
             </div>   
           </div>
-        </div>   
-
+        </div>  
         <div class="form-group">
           <div class="form-row"> 
             <label class="minute">Minutes</label>
