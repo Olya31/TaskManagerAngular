@@ -53,8 +53,9 @@ export class HomeComponent implements OnInit {
       this.taskService.deleteTask(id).subscribe(res => {
         if(res == true)
         {
+          this.loadTasks();
           this.toastr.success('Deleted successfully');
-          this.taskService.refreshList();        
+                  
         }
         else{
           this.toastr.error('Deleted unsuccessful');
